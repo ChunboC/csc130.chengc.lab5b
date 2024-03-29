@@ -2,7 +2,7 @@ package lab5b;
 
 public class Lab5SimApp {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		final int inputVal = 5;		// 5 input values
 		int[] input = new int[5];	
 		int tellers;	// number of tellers
@@ -39,16 +39,20 @@ public class Lab5SimApp {
 		SimulationTime smTime = new SimulationTime();
 		producer.start();
 		for (int i = 0; i < tellers; i++) {
-			teller[i] = new Thread(tg, new BankTellerThread(i, queue, producer));
+			teller[i] = new Thread(tg, new BankTellerThread1(i, queue, producer));
 			teller[i].start();
 		}
 		
 		while(producer.isAlive()) {
-			
+			producer.run();
 		}
 		System.out.println("The producer thread has finished...");
 		
-		//step25
+		while (tg.activeCount() > 0) {
+			tg.wait();
+		}
+		System.out.println("The tellers have completed all transactions...");
+		System.out.println("End of program...");
 		
 	}
 }
