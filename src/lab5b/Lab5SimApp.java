@@ -16,8 +16,8 @@ package lab5b;
 public class Lab5SimApp {
 
 	public static void main(String[] args) throws InterruptedException {
-		final int inputVal = 5; // 5 input values
-		int[] input = new int[5];
+		final int inputVal = 5; // 5 total input values
+		int[] input = new int[inputVal];
 		int tellers; // number of tellers
 		int queueSize; // size of the queue
 		int avgArrivalTime; // mean customer arrival time
@@ -41,26 +41,31 @@ public class Lab5SimApp {
 		}
 
 		// distribute inputs
-		tellers = input[0];
-		queueSize = input[1];
+		tellers = input[0]; // number of tellers
+		queueSize = input[1]; // customer queue capacity
 		queue = new ArrayQueue<Customer>(queueSize);
 		avgArrivalTime = input[2] * 1000; // in milliseconds
 		teller = new Thread[tellers];
-		simulationTime = SimulationTime.minutesToMilisecs(input[4]);
-		producer = new ProducerThread(queue, simulationTime, avgArrivalTime);
+		simulationTime = SimulationTime.minutesToMilisecs(input[4]); // duration the program runs
+		producer = new ProducerThread(queue, simulationTime, avgArrivalTime); // initializing producer thread
+
+		// program starts
 		System.out.println("Tellers are getting ready. The bank will open in 10 minutes...\n");
+		// initializing start time
 		SimulationTime sm = new SimulationTime();
+		// producer thread starts
 		producer.start();
+		// bank teller threads start
 		for (int i = 0; i < tellers; i++) {
 			teller[i] = new Thread(tg, new BankTellerThread(i, queue, producer));
 			teller[i].start();
 		}
-
+		// pause while producer thread is running
 		while (producer.isAlive()) {
 			Thread.sleep(10000);
 		}
 		System.out.println("The producer thread has finished...\n");
-
+		// pause while any bank teller thread is running
 		while (tg.activeCount() > 0) {
 			Thread.sleep(10000);
 		}

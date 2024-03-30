@@ -25,7 +25,8 @@ public class ProducerThread extends Thread {
 			try {
 				long arrivalTime = System.currentTimeMillis();
 				Customer customer = new Customer(count, arrivalTime);
-				System.out.println("Customer " + count + " arrived at minute " + SimulationTime.timeSinceStart(arrivalTime));
+				System.out.println(
+						"Customer " + count + " arrived at minute " + SimulationTime.timeSinceStart(arrivalTime));
 				if (line.isFull()) {
 					System.out.println("Queue is full. Customer " + count + " left the bank.");
 					continue;
