@@ -28,10 +28,10 @@ public class Customer {
 	}
 
 	public long getWaitTime() {
-		return transactionStartTime - arrivalTime;
+		return (transactionStartTime - arrivalTime) / 1000;
 	}
 
-	public long getTransation() {
+	public long getTransaction() {
 		return (transactionEndTime - transactionStartTime) / 1000;
 	}
 
@@ -48,6 +48,6 @@ public class Customer {
 	}
 
 	public String toString() {
-		return "Customer: " + number + ", " + "entered the bank at minute " + arrivalTime + ", [Transaction Time: " + getTransation() + " mins, Wait Time: " + getWaitTime() + " mins]";
+		return "Customer: " + number + ", " + "entered the bank at minute " + SimulationTime.timeSinceStart(arrivalTime)+ ", [Transaction Time: " + getTransaction() + " mins, Wait Time: " + getWaitTime() + " mins]\n";
 	}
 }
