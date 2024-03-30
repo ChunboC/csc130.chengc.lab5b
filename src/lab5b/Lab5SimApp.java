@@ -14,28 +14,19 @@ public class Lab5SimApp {
 		ProducerThread producer;
 		ArrayQueue<Customer> queue;
 		
-		input[0] = 2; // tellers
-		input[1] = 15; // queue size
-		input[2] = 5; // avg arrival
-		input[3] = 5; //
-		input[4] = 1; // simulation time
-		
 		// validate input
 		try {
-			int count = 0;
-			for (int i : input) {
-				if (i != 0)
-					count++;
-			}
-			if (count != 5) {
-				System.out.println("invalid input.");
-				return;
+			for (int i = 0; i < inputVal; i++) {
+				input[i] = Integer.parseInt(args[i]);
+				if (input[i] == 0) {
+					System.out.println("Invalid input. Program is ending...");
+					return;
+				}
 			}
 		} catch (NumberFormatException ex){
 			System.out.println("Invalid number format, expecting int[]");
 		}
-		
-		
+	
 		// distribute inputs
 		tellers = input[0];
 		queueSize = input[1];
