@@ -55,12 +55,12 @@ public class Lab5SimApp {
 		while(producer.isAlive()) {
 			Thread.sleep(10000);
 		}
-		System.out.println("The producer thread has finished...");
+		System.out.println("The producer thread has finished...\n");
 		
 		while (tg.activeCount() > 0) {
 			Thread.sleep(10000);
 		}
-		System.out.println("The tellers have completed all transactions...");
+		System.out.println("The tellers have completed all transactions...\n");
 		System.out.println("End of program...");
 	}
 }

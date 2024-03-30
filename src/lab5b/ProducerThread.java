@@ -43,6 +43,6 @@ public class ProducerThread extends Thread {
 			}
 
 		}
-		System.out.println("The Stimulation has ended, Number of Customers produced : " + count + ".");
+		System.out.println("The Stimulation has ended, Number of Customers produced: " + count + ".\n");
 	}
 }

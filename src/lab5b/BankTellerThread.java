@@ -65,9 +65,9 @@ public class BankTellerThread implements Runnable {
 					// Calls the customer class's setEndTime method to update the time the
 					// transaction ended
 					customer.setEndTime(currentTime);
-					System.out.println("Minute:" + SimulationTime.timeSinceStart(currentTime) + "\nTeller "
-							+ this.idNumber + ": Idle time: " + totalIdleTime + " minutes, Processed:");
-					System.out.println(customer);
+					System.out.println("\033[0;1mMinute:" + SimulationTime.timeSinceStart(currentTime) + "\nTeller "
+							+ this.idNumber + ": Idle time: " + totalIdleTime + " minutes, Processed:\n" + customer
+							+ "\033[0;0m");
 					// Add 1 to the count
 					count++;
 					startIdleTime = System.currentTimeMillis();
@@ -76,7 +76,7 @@ public class BankTellerThread implements Runnable {
 				}
 			}
 		}
-
+		System.out.println("[Teller " + idNumber + " finished. Processed " + count + " customers.]\n");
 	}
 
 }
