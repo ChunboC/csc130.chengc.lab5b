@@ -1,20 +1,33 @@
 package lab5b;
 
+/**
+ * <b>Title:</b> Application class for ProducerThread and BankTellerThread to
+ * simulate a bank's workflow<br>
+ * <b>Filename:</b> Lab5SimApp.java<br>
+ * <b>Date Written:</b> March 30, 2024<br>
+ * <b>Due Date:</b> March 30, 2024<br>
+ * <p>
+ * <b>Description:</b><br>
+ * main class to simulate a bank workflow using ProducerThread for customer and
+ * BankTellerThread for bank tellers<br>
+ * 
+ * @author Chunbo Cheng
+ */
 public class Lab5SimApp {
 
 	public static void main(String[] args) throws InterruptedException {
-		final int inputVal = 5;		// 5 input values
-		int[] input = new int[5];	
-		int tellers;	// number of tellers
-		int queueSize;	// size of the queue
-		int avgArrivalTime;		// mean customer arrival time
-		long simulationTime;	// simulation time
+		final int inputVal = 5; // 5 input values
+		int[] input = new int[5];
+		int tellers; // number of tellers
+		int queueSize; // size of the queue
+		int avgArrivalTime; // mean customer arrival time
+		long simulationTime; // simulation time
 		ThreadGroup tg = new ThreadGroup("tellers");
 		Thread[] teller = null;
 		ProducerThread producer;
 		ArrayQueue<Customer> queue;
-		
-		// validate input
+
+		// validate input while importing data from args
 		try {
 			for (int i = 0; i < inputVal; i++) {
 				input[i] = Integer.parseInt(args[i]);
@@ -23,15 +36,15 @@ public class Lab5SimApp {
 					return;
 				}
 			}
-		} catch (NumberFormatException ex){
+		} catch (NumberFormatException ex) {
 			System.out.println("Invalid number format, expecting int[]");
 		}
-	
+
 		// distribute inputs
 		tellers = input[0];
 		queueSize = input[1];
 		queue = new ArrayQueue<Customer>(queueSize);
-		avgArrivalTime = input[2] * 1000;	// in milliseconds
+		avgArrivalTime = input[2] * 1000; // in milliseconds
 		teller = new Thread[tellers];
 		simulationTime = SimulationTime.minutesToMilisecs(input[4]);
 		producer = new ProducerThread(queue, simulationTime, avgArrivalTime);
@@ -42,12 +55,12 @@ public class Lab5SimApp {
 			teller[i] = new Thread(tg, new BankTellerThread(i, queue, producer));
 			teller[i].start();
 		}
-		
-		while(producer.isAlive()) {
+
+		while (producer.isAlive()) {
 			Thread.sleep(10000);
 		}
 		System.out.println("The producer thread has finished...\n");
-		
+
 		while (tg.activeCount() > 0) {
 			Thread.sleep(10000);
 		}

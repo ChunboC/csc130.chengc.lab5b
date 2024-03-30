@@ -1,7 +1,8 @@
 package lab5b;
 
 /**
- * Title: BankTellerThread Description: Class that simulates bank tellers and
+ * Title: BankTellerThread 
+ * Description: Class that simulates bank tellers and
  * takes in customers from the producerThread class
  * 
  * @author Nathanielle Onchengco
