@@ -67,7 +67,6 @@ public class BankTellerThread implements Runnable {
 					}
 					// Saves the current time
 					currentTime = System.currentTimeMillis();
-
 					// Calls the customer class's setEndTime method to update the time the
 					// transaction ended
 					customer.setEndTime(currentTime);
@@ -78,9 +77,9 @@ public class BankTellerThread implements Runnable {
 					count++;
 					startIdleTime = System.currentTimeMillis();
 				} catch (QueueEmptyException qe) {
-					System.out.println("Queue Empty Exception...Teller " + this.idNumber + " waiting for customer\n");
+					System.out.println("Queue is empty... Teller " + this.idNumber + " waiting for customer\n");
 				}
-			}
+			} 
 		}
 		System.out.println("[Teller " + idNumber + " finished. Processed " + count + " customers.]\n");
 	}
