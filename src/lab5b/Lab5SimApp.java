@@ -62,12 +62,12 @@ public class Lab5SimApp {
 		}
 		// pause while producer thread is running
 		while (producer.isAlive()) {
-			Thread.sleep(10000);
+			// do nothing
 		}
 		System.out.println("The producer thread has finished...\n");
 		// pause while any bank teller thread is running
 		while (tg.activeCount() > 0) {
-			Thread.sleep(10000);
+			// do nothing
 		}
 		System.out.println("The tellers have completed all transactions...\n");
 		System.out.println("End of program...");

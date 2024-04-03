@@ -38,20 +38,15 @@ public class BankTellerThread implements Runnable {
 					// Starts the teller's idle time and sets it as the current time
 					long currentTime = System.currentTimeMillis();
 					endIdleTime = currentTime;
-					// Updates the customer's wait and start time with the same current time
-					// arrival time = current time - bank open time
-					// customer.setArrivalTime(currentTime); // milliseconds
-					// transaction start = current time
+					// Updates the start time with the same current time
 					customer.setTransactionStartTime(currentTime); // must be in milliseconds
-
 					// Generates a random a random number inclusive of 1000 and 15000
-					// rand - transaction time
+					// rand: transaction time
 					int max = 15000;
 					int min = 1000;
 					int range = max - min + 1;
 					long rand = 0;
 					rand = (long) (Math.random() * range) + min;
-
 					// Displays the teller's id number and idle time, as well as id of current
 					// customer
 					long totalIdleTime = (endIdleTime - startIdleTime) / 1000;
